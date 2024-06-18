@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Results - Video Summary App{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Results for Video: {{ results[0].video_name }}</h1>
+        <hr>
+        {% for result in results %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <!-- Summary {{ loop.index }} -->
+                Video Name: {{ result.video_name }}
+            </div>
+            <div class="card-body">
+                <!-- <h5 class="card-title">Video Name: {{ result.video_name }}</h5> -->
+                
+                <!-- Video Player Section -->
+                <div class="mb-4">
+                    <video width="100%" controls>
+                        <source src="{{ url_for('static', filename='videos/' + result.video_name) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="mb-3"><strong>Topics:</strong> {{ result.topics }}</div>
+                <div class="mb-3"><strong>Hashtags:</strong> {{ result.hashtags }}</div>
+                
+                <!-- Ordered Highlights Section -->
+                <div class="mb-3"><strong>Highlights:</strong></div>
+                <ul>
+                    {% set sorted_highlights = result.highlights['root'] | sort(attribute='start') %}
+                    {% for highlight in sorted_highlights %}
+                        <li><strong>{{ highlight.highlight }}:</strong> {{ highlight.start | seconds_to_hhmmss }} - {{ highlight.end | seconds_to_hhmmss }}</li>
+                    {% endfor %}
+                </ul>
+
+                <div class="mb-3"><strong>Chapters:</strong></div>
+                <ul>
+                    {% for chapter in result.chapters['root'] %}
+                        <li><strong>{{ chapter.chapter_title }}:</strong> {{ chapter.chapter_summary }}</li>
+                    {% endfor %}
+                </ul>
+                <div class="mb-3"><strong>Keywords:</strong> {{ result.keywords }}</div>
+                <p class="card-text"><strong>Summary:</strong> {{ result.summary }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

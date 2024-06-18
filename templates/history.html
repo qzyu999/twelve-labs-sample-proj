@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}History - Video Summary App{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Past Results</h1>
+        <form method="POST" action="{{ url_for('history') }}">
+            <div class="form-group">
+                <label for="videoSelect">Select a Video:</label>
+                <select class="form-control" id="videoSelect" name="video_id">
+                    {% for video_id, video_name in video_list %}
+                    <option value="{{ video_id }}">{{ video_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Show Results</button>
+        </form>
+    </div>
+{% endblock %}

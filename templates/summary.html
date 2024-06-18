@@ -3,37 +3,42 @@
 {% block title %}Video Summary{% endblock %}
 
 {% block content %}
-<div class="card">
-    <div class="card-header">
-        <h1>Video Summary</h1>
-    </div>
-    <div class="card-body">
-        <video class="mb-3" width="320" height="240" controls>
-            <source src="{{ url_for('static', filename='videos/' ~ video_name) }}" type="video/mp4">
-        </video>
-        <h2>Title: {{ title }}</h2>
-        <p><strong>Topics:</strong> {{ topics }}</p>
-        <p><strong>Hashtags:</strong> {{ hashtags }}</p>
-        <p><strong>Summary:</strong> {{ summary }}</p>
+    <div class="container mt-4">
+        <h1>Video Summary for {{ video_name }}</h1>
         
-        <h3>Chapters:</h3>
-        <ul class="list-group mb-3">
-            {% for chapter in chapters %}
-                <li class="list-group-item">
-                    <strong>Chapter {{ chapter.chapter_number }}:</strong> {{ chapter.chapter_title }} ({{ chapter.start }} - {{ chapter.end }})
-                    <p>{{ chapter.chapter_summary }}</p>
-                </li>
+        <!-- Video Player Section -->
+        <div class="mb-4">
+            <video width="100%" controls>
+                <source src="{{ url_for('static', filename='videos/' + video_name) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Details Section -->
+        <div class="mb-3"><strong>Video Name:</strong> {{ video_name }}</div>
+        <div class="mb-3"><strong>Topics:</strong> {{ topics }}</div>
+        <div class="mb-3"><strong>Hashtags:</strong> {{ hashtags }}</div>
+        
+        <!-- Ordered Highlights Section -->
+        <div class="mb-3"><strong>Highlights:</strong></div>
+        <ul>
+            {% set sorted_highlights = highlights['root'] | sort(attribute='start') %}
+            {% for highlight in sorted_highlights %}
+                <li><strong>{{ highlight.highlight }}:</strong> {{ highlight.start | seconds_to_hhmmss }} - {{ highlight.end | seconds_to_hhmmss }}</li>
             {% endfor %}
         </ul>
 
-        <h3>Highlights:</h3>
-        <ul class="list-group mb-3">
-            {% for highlight in highlights %}
-                <li class="list-group-item">{{ highlight.highlight }} ({{ highlight.start }} - {{ highlight.end }})</li>
+        <div class="mb-3"><strong>Chapters:</strong></div>
+        <ul>
+            {% for chapter in chapters['root'] %}
+                <li><strong>{{ chapter.chapter_title }}:</strong> {{ chapter.chapter_summary }}</li>
             {% endfor %}
         </ul>
-        
-        <p><strong>Keywords:</strong> {{ keywords }}</p>
+
+        <div class="mb-3"><strong>Keywords:</strong> {{ keywords }}</div>
+        <div class="mb-3"><strong>Summary:</strong></div>
+        <p>{{ summary }}</p>
+
+        <a href="/" class="btn btn-secondary">Go Back</a>
     </div>
-</div>
 {% endblock %}
