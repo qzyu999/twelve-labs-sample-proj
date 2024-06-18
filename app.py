@@ -44,7 +44,7 @@ class JSONType(TypeDecorator):
 class VideoSummary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     video_id = db.Column(db.String(200), nullable=False)
-    index_name = db.Column(db.String(200), nullable=False)
+    index_name = db.Column(db.String(1000), nullable=False)
     video_name = db.Column(db.String(200), nullable=False)
     title = db.Column(db.String(500), nullable=False)
     topics = db.Column(JSONType, nullable=False)
