@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Video{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1>Upload Video</h1>
+    </div>
+    <div class="card-body">
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="video">Choose a video:</label>
+                <input type="file" class="form-control-file" name="video" id="video" accept=".mp4" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

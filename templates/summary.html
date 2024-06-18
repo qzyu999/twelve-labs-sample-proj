@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Video Summary{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1>Video Summary</h1>
+    </div>
+    <div class="card-body">
+        <video class="mb-3" width="320" height="240" controls>
+            <source src="{{ url_for('static', filename='videos/' ~ video_name) }}" type="video/mp4">
+        </video>
+        <h2>Title: {{ title }}</h2>
+        <p><strong>Topics:</strong> {{ topics }}</p>
+        <p><strong>Hashtags:</strong> {{ hashtags }}</p>
+        <p><strong>Summary:</strong> {{ summary }}</p>
+        
+        <h3>Chapters:</h3>
+        <ul class="list-group mb-3">
+            {% for chapter in chapters %}
+                <li class="list-group-item">
+                    <strong>Chapter {{ chapter.chapter_number }}:</strong> {{ chapter.chapter_title }} ({{ chapter.start }} - {{ chapter.end }})
+                    <p>{{ chapter.chapter_summary }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Highlights:</h3>
+        <ul class="list-group mb-3">
+            {% for highlight in highlights %}
+                <li class="list-group-item">{{ highlight.highlight }} ({{ highlight.start }} - {{ highlight.end }})</li>
+            {% endfor %}
+        </ul>
+        
+        <p><strong>Keywords:</strong> {{ keywords }}</p>
+    </div>
+</div>
+{% endblock %}
