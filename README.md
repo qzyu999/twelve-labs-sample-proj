@@ -1,4 +1,4 @@
-# twelve-labs-sample-proj
+# Song Summary AI, a Gen AI app for understanding and interpreting music videos, powered by Twelve Labs' Pegasus-1 model
 This is a sample project detailing an app called Song Summary AI, powered by Twelve Labs' Pegasus-1 model which has multimodal understanding. The idea for this app is to allow users to upload their favorite music videos, and the app will proceed to  analyze and provide interpretations of the music video. It will provide the following:
 - topics mentioned in the video
 - hashtags that can be associated with the music video
