@@ -4,12 +4,11 @@
 
 {% block content %}
     <div class="container mt-5">
-        <h1>Results for Video: {{ results[0].video_name }}</h1>
+        <h1>Song Summary for: {{ results[0].video_name }}</h1>
         <hr>
         {% for result in results %}
         <div class="card mb-3">
             <div class="card-header">
-                <!-- Summary {{ loop.index }} -->
                 Index Name: {{ result.index_name }}
             </div>
             <div class="card-body">
@@ -41,7 +40,7 @@
                         <li><strong>{{ chapter.chapter_title }}:</strong> {{ chapter.chapter_summary }}</li>
                     {% endfor %}
                 </ul>
-                <div class="mb-3"><strong>Keywords:</strong> {{ result.keywords }}</div>
+                <div class="mb-3"><strong>Symbolism:</strong> {{ result.keywords }}</div>
                 <p class="card-text"><strong>Summary:</strong> {{ result.summary }}</p>
             </div>
         </div>

@@ -114,23 +114,34 @@ def upload():
             video_id = task.video_id
 
             # Generate summaries and save them to the database
-            res_gist = client.generate.gist(video_id=video_id, types=["title", "topic", "hashtag"])
-            res_summary = client.generate.summarize(video_id=video_id, type="summary")
+            res = client.generate.gist(video_id=video_id, types=["title", "topic", "hashtag"])
+            res_title = res.title
+            res_topics = res.topics
+            res_hashtags = res.hashtags
+            res = client.generate.summarize(video_id=video_id, type="summary")
+            res_summary = res.summary
             res_chapters = client.generate.summarize(video_id=video_id, type="chapter")
-            res_highlights = client.generate.summarize(video_id=video_id, type="highlight")
-            res_keywords = client.generate.text(video_id=video_id, prompt="Based on this video, I want to generate five keywords for SEO (Search Engine Optimization).")
+            res = client.generate.summarize(video_id=video_id, type="highlight")
+            res_highlights = res.highlights
+            res = client.generate.text(
+                video_id=video_id,
+                prompt="\
+                    Discuss the symbolism and themes present in this music video. \
+                    What are the underlying messages or motifs, and how are they represented visually and musically?"
+            )
+            res_keywords = res.data
 
             video_summary = VideoSummary(
                 video_id=video_id,
                 index_name=index_name,
                 video_name=video.filename,
-                title=res_gist.title,
-                topics=res_gist.topics,
-                hashtags=res_gist.hashtags,
-                summary=res_summary.summary,
+                title=res_title,
+                topics=res_topics,
+                hashtags=res_hashtags,
+                summary=res_summary,
                 chapters=res_chapters.chapters,
-                highlights=res_highlights.highlights,
-                keywords=res_keywords.data
+                highlights=res_highlights,
+                keywords=res_keywords
             )
 
             db.session.add(video_summary)

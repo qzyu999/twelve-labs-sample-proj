@@ -3,7 +3,7 @@
 {% block title %}Upload Video{% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="card mt-4">
     <div class="card-header">
         <h1>Upload Video</h1>
     </div>
@@ -15,6 +15,24 @@
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
+    </div>
+</div>
+
+<!-- Summary Card -->
+<div class="card mt-4">
+    <div class="card-header">
+        <h1>How it Works</h1>
+    </div>
+    <div class="card-body">
+        <p>
+            Upload a your favorite music video (.mp4) to the app, and it will utilize Twelve Labs'
+            Pegaus-1 model to generate a creative summary, highlighting various aspects of the song 
+            and explaining it to you, in addition to discussing key topics like hidden symbolism.
+        </p>
+        <p>
+            Previously uploaded videos and their corresponding Gen AI-powered analysis can be re-visited
+            from the History tab at the top-left in the navbar.
+        </p>
     </div>
 </div>
 {% endblock %}
