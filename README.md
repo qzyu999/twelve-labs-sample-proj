@@ -20,6 +20,8 @@ Further work:
 - Given more time, it would be great to make the frontend have more details, to give it elements of music and Gen AI vibes.
 
 Examples of app:
+![image0](./static/images/example-0.png)
 ![image1](./static/images/example-1.png)
 ![image2](./static/images/example-2.png)
 ![image3](./static/images/example-3.png)
+![image4](./static/images/example-4.png)
