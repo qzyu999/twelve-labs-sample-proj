@@ -120,7 +120,8 @@ def upload():
             res_hashtags = res.hashtags
             res = client.generate.summarize(video_id=video_id, type="summary")
             res_summary = res.summary
-            res_chapters = client.generate.summarize(video_id=video_id, type="chapter")
+            res = client.generate.summarize(video_id=video_id, type="chapter")
+            res_chapters = res.chapters
             res = client.generate.summarize(video_id=video_id, type="highlight")
             res_highlights = res.highlights
             res = client.generate.text(
@@ -139,7 +140,7 @@ def upload():
                 topics=res_topics,
                 hashtags=res_hashtags,
                 summary=res_summary,
-                chapters=res_chapters.chapters,
+                chapters=res_chapters,
                 highlights=res_highlights,
                 keywords=res_keywords
             )

@@ -18,6 +18,7 @@ Challenges faced:
 
 Further work:
 - Given more time, it would be great to make the frontend have more details, to give it elements of music and Gen AI vibes.
+- Another idea is to create some authentication page, where users need to login first. Also, you can have some sort of role-based access for data governance, so users only see videos they're allowed to see. This would be more effective in a business setting, where users are allowed access to a subset of videos which have been processed for them. It could make sense to switch from Flask to Django for example at this point.
 
 Examples of app:
 - Home Page
